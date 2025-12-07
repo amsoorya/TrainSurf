@@ -1,8 +1,8 @@
-\# 🚆 TrainSurf — Smart Seat-Hop Search for Indian Railways
+\# TrainSurf — Smart Seat-Hop Search for Indian Railways
 
 
 
-\*\*TrainSurf\*\* is a developer-built, algorithm-driven project that explores a real-world problem faced by Indian Railways passengers: \*\*direct tickets often show unavailable even when a journey is still possible by intelligently booking shorter segments on the same train\*\*.
+TrainSurf is a developer-built, algorithm-driven project that explores a real-world problem faced by Indian Railways passengers: direct tickets often show unavailable even when a journey is still possible by intelligently booking shorter segments on the same train.
 
 
 
@@ -14,17 +14,17 @@ This project was designed and implemented during my free time as a student devel
 
 
 
-\## 👤 Developer
+\## Developer
 
 
 
-\*\*Jaya Soorya\*\*
+\*\*Jaya Soorya\*\*  
 
-📧 Email: \[amjayasoorya@gmail.com](mailto:amjayasoorya@gmail.com)
+📧 Email: amjayasoorya@gmail.com  
 
-📞 Phone: +91 9345259635
+📞 Phone: +91 9345259635  
 
-🔗 GitHub: \[https://github.com/amsoorya](https://github.com/amsoorya)
+🔗 GitHub: https://github.com/amsoorya
 
 
 
@@ -32,7 +32,7 @@ This project was designed and implemented during my free time as a student devel
 
 
 
-\## 🧠 Real Problem \& Motivation
+\## Real Problem and Motivation
 
 
 
@@ -40,19 +40,19 @@ I am a hosteller, and trains are usually my default mode of transport.
 
 
 
-During one such journey, \*every direct ticket from my source to destination showed unavailable\*. I tried nearby stations as well, but still had no luck. Out of necessity, I manually checked \*\*segment-wise availability within the same train\*\*:
+During one such journey, every direct ticket from my source to destination showed unavailable. I tried nearby stations as well, but still had no luck. Out of necessity, I manually checked segment-wise availability within the same train:
 
 
 
-\* Source → next station
+\- Source to next station
 
-\* That station → next
+\- That station to next
 
-\* And so on…
+\- And so on…
 
 
 
-Surprisingly, I was able to complete my entire journey by booking \*\*multiple short segments on the same train\*\*. I ended up doing around \*\*four seat hops across nearly ten stations\*\*, but it worked and got me home.
+Surprisingly, I was able to complete my entire journey by booking multiple short segments on the same train. I ended up doing around four seat hops across nearly ten stations, but it worked and got me home.
 
 
 
@@ -60,15 +60,15 @@ That experience led to an important realization:
 
 
 
-> \*Existing railway apps like ixigo, ConfirmTkt, etc. do not attempt this computation at all.\*
+> Existing railway apps like ixigo, ConfirmTkt, etc. do not attempt this computation at all.
 
 
 
-The reason is understandable — the search space grows quickly and can be computationally heavy. But with the right techniques such as \*\*pruning, memoization, and priority-based search\*\*, it becomes manageable.
+The reason is understandable — the search space grows quickly and can be computationally heavy. But with the right techniques such as pruning, memoization, and priority-based search, it becomes manageable.
 
 
 
-This insight became the foundation of \*\*TrainSurf\*\*.
+This insight became the foundation of TrainSurf.
 
 
 
@@ -76,25 +76,23 @@ This insight became the foundation of \*\*TrainSurf\*\*.
 
 
 
-\## 🎯 What TrainSurf Does
+\## What TrainSurf Does
 
 
 
 Given:
 
+\- Train number
 
+\- Source station
 
-\* Train number
+\- Destination station
 
-\* Source station
+\- Travel date
 
-\* Destination station
+\- Class type
 
-\* Travel date
-
-\* Class type
-
-\* Quota
+\- Quota
 
 
 
@@ -102,55 +100,21 @@ TrainSurf automatically:
 
 
 
-1\. Fetches the \*\*entire route\*\* of the train
+1\. Fetches the entire route of the train
 
-2\. Checks \*\*seat availability for all valid station pairs\*\* along the route
+2\. Checks seat availability for all valid station pairs along the route
 
-3\. Models the problem as a \*\*graph traversal task\*\*
+3\. Models the problem as a graph traversal task
 
-4\. Detects \*\*overlapping and stitchable segments\*\*
+4\. Detects overlapping and stitchable segments
 
-5\. Computes the \*\*minimum number of seat hops\*\* needed to complete the journey
+5\. Computes the minimum number of seat hops needed to complete the journey
 
-6\. Outputs a \*\*clear booking plan\*\* for the user
-
-
-
-The result is a journey that may not be directly available, but \*\*is still practically achievable\*\*.
+6\. Outputs a clear booking plan for the user
 
 
 
----
-
-
-
-\## 🧩 Algorithmic Approach (High-Level)
-
-
-
-\* Treat stations as nodes in a graph
-
-\* Treat available seat segments as directed edges
-
-\* Use:
-
-
-
-&nbsp; \* \*\*Memoization\*\* to avoid duplicate API calls
-
-&nbsp; \* \*\*Parallel execution\*\* to control latency
-
-&nbsp; \* \*\*Priority for longer segments first\*\*
-
-&nbsp; \* \*\*Overlap-aware stitching\*\* to reduce transfers
-
-
-
-Finally, all valid paths are evaluated and the path with \*\*minimum transfers\*\* is selected.
-
-
-
-This is not a brute-force search — it is a \*\*carefully pruned and optimized solution\*\* to a real constraint.
+The result is a journey that may not be directly available, but is still practically achievable.
 
 
 
@@ -158,17 +122,49 @@ This is not a brute-force search — it is a \*\*carefully pruned and optimized 
 
 
 
-\## 🖥️ Implementation Details
+\## Algorithmic Approach (High-Level)
 
 
 
-\* \*\*Language:\*\* Python
+\- Treat stations as nodes in a graph
 
-\* \*\*Framework:\*\* Streamlit (for interactive UI)
+\- Treat available seat segments as directed edges
 
-\* \*\*Architecture:\*\* Client-side UI + external Railway APIs
+\- Use:
 
-\* \*\*Concurrency:\*\* ThreadPoolExecutor for parallel segment checks
+&nbsp; - Memoization to avoid duplicate API calls
+
+&nbsp; - Parallel execution to control latency
+
+&nbsp; - Priority for longer segments first
+
+&nbsp; - Overlap-aware stitching to reduce transfers
+
+
+
+Finally, all valid paths are evaluated and the path with minimum transfers is selected.
+
+
+
+This is not a brute-force search — it is a carefully pruned and optimized solution to a real constraint.
+
+
+
+---
+
+
+
+\## Implementation Details
+
+
+
+\- \*\*Language:\*\* Python
+
+\- \*\*Framework:\*\* Streamlit (for interactive UI)
+
+\- \*\*Architecture:\*\* Client-side UI + external Railway APIs
+
+\- \*\*Concurrency:\*\* ThreadPoolExecutor for parallel segment checks
 
 
 
@@ -180,31 +176,31 @@ The entire logic is implemented in a single, readable codebase (`app.py`) for cl
 
 
 
-\## 🔌 APIs Used (Credits)
+\## APIs Used (Credits)
 
 
 
-This project uses public APIs accessed via \*\*RapidAPI\*\*. All credit for railway data goes to the respective providers.
+This project uses public APIs accessed via RapidAPI. All credit for railway data goes to the respective providers.
 
 
 
-\### 1️⃣ IRCTC Train API — Train details \& route
+\### 1. IRCTC Train API — Train details and route
 
 
 
-Provider: QuantumBits / IRCTC Train API
+\*\*Provider:\*\* QuantumBits / IRCTC Train API  
 
-🔗 \[https://rapidapi.com/quantumbits1011/api/irctc-train-api/](https://rapidapi.com/quantumbits1011/api/irctc-train-api/)
-
-
-
-\### 2️⃣ IRCTC Seat Availability API
+🔗 https://rapidapi.com/quantumbits1011/api/irctc-train-api/
 
 
 
-Provider: IRCTCAPI
+\### 2. IRCTC Seat Availability API
 
-🔗 \[https://rapidapi.com/IRCTCAPI/api/irctc1/](https://rapidapi.com/IRCTCAPI/api/irctc1/)
+
+
+\*\*Provider:\*\* IRCTCAPI  
+
+🔗 https://rapidapi.com/IRCTCAPI/api/irctc1/
 
 
 
@@ -216,7 +212,7 @@ Provider: IRCTCAPI
 
 
 
-\## ▶️ How to Run Locally
+\## How to Run Locally
 
 
 
@@ -234,7 +230,7 @@ streamlit run app.py
 
 
 
-You will need a \*\*RapidAPI key\*\* to test the application.
+You will need a RapidAPI key to test the application.
 
 
 
@@ -242,13 +238,13 @@ You will need a \*\*RapidAPI key\*\* to test the application.
 
 
 
-\## 📸 Demo Assets
+\## Demo Assets
 
 
 
-\* A screen-recorded demo (`demo.mp4`)
+\- A screen-recorded demo (`demo.mp4`)
 
-\* UI screenshot (`screenshot.png`)
+\- UI screenshot (`screenshot.png`)
 
 
 
@@ -260,37 +256,17 @@ Both are included in the `assets/` folder of the repository.
 
 
 
-\## ⚠️ Disclaimer
+\## Disclaimer
 
 
 
-\* This project \*\*does not bypass IRCTC systems\*\*
+\- This project does not bypass IRCTC systems
 
-\* It relies entirely on third-party APIs for data
+\- It relies entirely on third-party APIs for data
 
-\* Seat availability accuracy depends on API responses
+\- Seat availability accuracy depends on API responses
 
-\* This is an \*\*educational and exploratory project\*\*, not an official IRCTC product
-
-
-
----
-
-
-
-\## 🚀 Future Improvements
-
-
-
-\* Persistent caching to reduce API cost
-
-\* Smarter pruning strategies
-
-\* Cost-aware search planning
-
-\* UI performance enhancements
-
-\* Migration to paid API tiers
+\- This is an educational and exploratory project, not an official IRCTC product
 
 
 
@@ -298,7 +274,27 @@ Both are included in the `assets/` folder of the repository.
 
 
 
-\## 🤝 Final Note for Reviewers
+\## Future Improvements
+
+
+
+\- Persistent caching to reduce API cost
+
+\- Smarter pruning strategies
+
+\- Cost-aware search planning
+
+\- UI performance enhancements
+
+\- Migration to paid API tiers
+
+
+
+---
+
+
+
+\## Final Note for Reviewers
 
 
 
@@ -306,19 +302,19 @@ TrainSurf is not a clone or a UI demo.
 
 
 
-It is a \*\*problem-first project\*\*, built from a real-life constraint, demonstrating:
+It is a problem-first project, built from a real-life constraint, demonstrating:
 
 
 
-\* Analytical thinking
+\- Analytical thinking
 
-\* Algorithm design
+\- Algorithm design
 
-\* Practical API usage
+\- Practical API usage
 
-\* Trade-off awareness
+\- Trade-off awareness
 
-\* Clean, explainable implementation
+\- Clean, explainable implementation
 
 
 
@@ -327,6 +323,4 @@ I built this project independently during my free time and would be happy to dis
 
 
 Thank you for taking the time to review my work.
-
-
 
